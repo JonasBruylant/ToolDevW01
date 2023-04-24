@@ -10,7 +10,7 @@
 #include "filereadstream.h"
 
 
-int MakeCube(FILE* file, float x, float y, float z, int vertexCounter);
+int MakeCube(FILE* file, float x, float y, float z, int cubeCounter);
 
 int main()
 {
@@ -51,7 +51,7 @@ int main()
 		FILE* pOFile = nullptr;
 		_wfopen_s(&pOFile, L"scene.obj", L"w+,ccs=UTF-8");
 		if (pOFile != nullptr) {
-			int vertexCounter{ 0 };
+			int cubeCounter{ 0 };
 			for (rapidjson::Value::ConstValueIterator itr = jsonDoc.Begin(); itr != jsonDoc.End(); ++itr)
 			{
 				const rapidjson::Value& cube = *itr;
@@ -68,9 +68,9 @@ int main()
 						float x = xVal.GetFloat();
 						float y = yVal.GetFloat();
 						float z = zVal.GetFloat();
-						MakeCube(pOFile, x, y, z, vertexCounter);
+						MakeCube(pOFile, x, y, z, cubeCounter);
 
-						++vertexCounter;
+						++cubeCounter;
 
 					}
 				}
@@ -85,7 +85,7 @@ int main()
 	}
 }
 
-int MakeCube(FILE* file, float x, float y, float z, int vertexCounter)
+int MakeCube(FILE* file, float x, float y, float z, int cubeCounter)
 {
 
 	// it was possible to create the file for writing.
@@ -108,23 +108,23 @@ int MakeCube(FILE* file, float x, float y, float z, int vertexCounter)
 	fwprintf_s(file, L"vn %.4f %.4f %.4f\n", 1.0f, 0.0f, 0.0f);
 	fwprintf_s(file, L"vn %.4f %.4f %.4f\n", -1.0f, 0.0f, 0.0f);
 
-	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (vertexCounter * 8) + 1, 2, (vertexCounter * 8) + 7, 2, (vertexCounter * 8) + 5, 2);
-	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (vertexCounter * 8) + 1, 2, (vertexCounter * 8) + 3, 2, (vertexCounter * 8) + 7, 2);
+	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (cubeCounter * 8) + 1, 2, (cubeCounter * 8) + 7, 2, (cubeCounter * 8) + 5, 2);
+	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (cubeCounter * 8) + 1, 2, (cubeCounter * 8) + 3, 2, (cubeCounter * 8) + 7, 2);
 
-	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (vertexCounter * 8) + 1, 6, (vertexCounter * 8) + 4, 6, (vertexCounter * 8) + 3, 6);
-	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (vertexCounter * 8) + 1, 6, (vertexCounter * 8) + 2, 6, (vertexCounter * 8) + 4, 6);
+	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (cubeCounter * 8) + 1, 6, (cubeCounter * 8) + 4, 6, (cubeCounter * 8) + 3, 6);
+	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (cubeCounter * 8) + 1, 6, (cubeCounter * 8) + 2, 6, (cubeCounter * 8) + 4, 6);
 
-	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (vertexCounter * 8) + 3, 3, (vertexCounter * 8) + 8, 3, (vertexCounter * 8) + 7, 3);
-	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (vertexCounter * 8) + 3, 3, (vertexCounter * 8) + 4, 3, (vertexCounter * 8) + 8, 3);
+	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (cubeCounter * 8) + 3, 3, (cubeCounter * 8) + 8, 3, (cubeCounter * 8) + 7, 3);
+	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (cubeCounter * 8) + 3, 3, (cubeCounter * 8) + 4, 3, (cubeCounter * 8) + 8, 3);
 
-	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (vertexCounter * 8) + 5, 5, (vertexCounter * 8) + 7, 5, (vertexCounter * 8) + 8, 5);
-	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (vertexCounter * 8) + 5, 5, (vertexCounter * 8) + 8, 5, (vertexCounter * 8) + 6, 5);
+	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (cubeCounter * 8) + 5, 5, (cubeCounter * 8) + 7, 5, (cubeCounter * 8) + 8, 5);
+	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (cubeCounter * 8) + 5, 5, (cubeCounter * 8) + 8, 5, (cubeCounter * 8) + 6, 5);
 
-	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (vertexCounter * 8) + 1, 4, (vertexCounter * 8) + 5, 4, (vertexCounter * 8) + 6, 4);
-	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (vertexCounter * 8) + 1, 4, (vertexCounter * 8) + 6, 4, (vertexCounter * 8) + 2, 4);
+	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (cubeCounter * 8) + 1, 4, (cubeCounter * 8) + 5, 4, (cubeCounter * 8) + 6, 4);
+	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (cubeCounter * 8) + 1, 4, (cubeCounter * 8) + 6, 4, (cubeCounter * 8) + 2, 4);
 
-	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (vertexCounter * 8) + 2, 1, (vertexCounter * 8) + 6, 1, (vertexCounter * 8) + 8, 1);
-	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (vertexCounter * 8) + 2, 1, (vertexCounter * 8) + 8, 1, (vertexCounter * 8) + 4, 1);
+	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (cubeCounter * 8) + 2, 1, (cubeCounter * 8) + 6, 1, (cubeCounter * 8) + 8, 1);
+	fwprintf_s(file, L"f %d//%d %d//%d %d//%d\n", (cubeCounter * 8) + 2, 1, (cubeCounter * 8) + 8, 1, (cubeCounter * 8) + 4, 1);
 
 	return 0;
 }
